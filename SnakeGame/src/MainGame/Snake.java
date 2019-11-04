@@ -9,6 +9,8 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Random;
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 
@@ -26,7 +28,7 @@ public class Snake implements ActionListener, KeyListener{
 	
 	public static final int RIGHT = 0, LEFT = 1, UP = 2, DOWN = 3, SCALE = 10;
 	
-	public int direction, score, tail, highScore;
+	public int direction, score, tail, highScore = 0;
 	
 	public int time, ticks = 0, delay, initialDelay = 50;
 	
@@ -250,7 +252,10 @@ public class Snake implements ActionListener, KeyListener{
 	
 	//get current high score from text file
 	public void getHighScore() {
-		File file = new File("C:\\Users\\Jonathan\\Desktop\\Java Files\\SnakeGame\\HighScore.txt");
+		Path path = Paths.get("HighScore.txt").toAbsolutePath();
+		String currentPath = path.toString();
+		System.out.println(currentPath);
+		File file = new File(currentPath);
 				
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(file));
@@ -272,7 +277,9 @@ public class Snake implements ActionListener, KeyListener{
 	
 	//write new high score to text file
 	public void setHighScore(String scoreString) {
-		File file = new File("C:\\Users\\Jonathan\\Desktop\\Java Files\\SnakeGame\\HighScore.txt");
+		Path path = Paths.get("HighScore.txt").toAbsolutePath();
+		String currentPath = path.toString();
+		File file = new File(currentPath);
 	
 		try {
 			FileWriter fout = new FileWriter(file);
